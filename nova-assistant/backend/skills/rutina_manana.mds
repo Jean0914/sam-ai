@@ -1,0 +1,11 @@
+# rutina_manana
+
+trigger:
+  - rutina mañanera
+  - buenos días
+  - inicia mi día
+
+actions:
+  - encender_luces
+  - reproducir_musica
+  - mostrar_clima

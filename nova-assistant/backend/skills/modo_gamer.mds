@@ -1,0 +1,13 @@
+trigger:
+  - "Modo Gamer"
+  - "Activa el modo gamer"
+  - "Modo juego"
+actions:
+  - type: "close_app"
+    param: "chrome.exe"
+  - type: "close_app"
+    param: "code.exe"
+  - type: "open_anything"
+    param: "steam://open/main"
+  - type: "speak"
+    param: "Modo Gamer activado, Jean. He cerrado las apps pesadas y Steam está listo. ¡Buena suerte en la partida!"
