@@ -32,7 +32,7 @@ function App() {
     // Si estamos en local (localhost o IP), usamos el puerto 8080. 
     // Si no, asumimos que es la URL de producción en Render.
     const isLocal = host === 'localhost' || host.match(/^\d+\.\d+\.\d+\.\d+$/);
-    const wsHost = isLocal ? `${host}:8080` : 'TU_APP_BACKEND.onrender.com'; 
+    const wsHost = isLocal ? `${host}:8080` : 'sam-ai-wgic.onrender.com'; 
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     
     const ws = new WebSocket(`${protocol}//${wsHost}`);
