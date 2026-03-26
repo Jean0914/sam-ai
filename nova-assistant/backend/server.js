@@ -194,4 +194,6 @@ Sam:`;
 });
 
 const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => { console.log(`Backend en puerto ${PORT}`); });
+server.listen(PORT, '0.0.0.0', () => { 
+  console.log(`Backend escuchando en 0.0.0.0:${PORT}`); 
+});
