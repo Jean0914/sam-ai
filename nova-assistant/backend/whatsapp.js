@@ -16,7 +16,11 @@ class WhatsAppClient {
                     '--disable-gpu',
                     '--disable-extensions',
                     '--no-first-run',
-                    '--no-default-browser-check'
+                    '--no-default-browser-check',
+                    '--disable-accelerated-2d-canvas',
+                    '--no-zygote',
+                    '--single-process',
+                    '--disable-gl-drawing'
                 ]
             }
         });
