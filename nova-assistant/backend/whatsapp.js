@@ -15,12 +15,14 @@ class WhatsAppClient {
         this.broadcast = broadcastFunc;
         this.notify = notifyFunc || (() => {});
         this.repliedContacts = new Set();
+        this.lastQR = null;
         this.init();
     }
 
     init() {
         this.client.on('qr', (qr) => {
             console.log('\n[WhatsApp] === ESCANEA ESTE CÓDIGO QR PARA VINCULAR A SAM ===');
+            this.lastQR = qr;
             qrcode.generate(qr, { small: true });
             this.broadcast({ type: 'WA_QR', value: qr });
         });

@@ -69,6 +69,12 @@ const interpreter = new SkillsInterpreter((data) => broadcast(data), waClient);
 
 wss.on('connection', async function connection(ws) {
   console.log("=> Nuevo cliente conectado");
+  
+  // Si hay un QR pendiente, enviarlo al nuevo cliente de inmediato
+  if (waClient && waClient.lastQR) {
+    ws.send(JSON.stringify({ type: 'WA_QR', value: waClient.lastQR }));
+  }
+
   ws.on('message', async (message) => {
     try {
       const msgString = message.toString();
