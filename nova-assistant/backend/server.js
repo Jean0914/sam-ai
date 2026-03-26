@@ -15,13 +15,28 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+const QRCode = require('qrcode');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
 // Health check para Render
 app.get('/', (req, res) => {
   res.send('Sam Backend is Running! 🚀');
 });
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// Ruta para ver el QR como imagen directamente
+app.get('/qr', async (req, res) => {
+  if (waClient && waClient.lastQR) {
+    try {
+      const qrImage = await QRCode.toBuffer(waClient.lastQR);
+      res.type('png').send(qrImage);
+    } catch (err) {
+      res.status(500).send('Error generando el QR');
+    }
+  } else {
+    res.send('El código QR aún no se ha generado o Sam ya está conectada. Prueba en unos segundos.');
+  }
+});
 
 let conversationHistory = []; // 🧠 BUFFER DE CONTEXTO
 let waitingForManualActivation = true; // Control de escucha activa
