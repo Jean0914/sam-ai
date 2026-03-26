@@ -34,10 +34,14 @@ function App() {
     // Si no, asumimos que es la URL de producción en Render.
     const isLocal = host === 'localhost' || host.match(/^\d+\.\d+\.\d+\.\d+$/);
     const wsHost = isLocal ? `${host}:8080` : 'sam-ai-wgic.onrender.com'; 
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const protocol = isLocal ? 'ws:' : 'wss:';
     
+    console.log(`[Dashboard] Connecting to ${protocol}//${wsHost}`);
     const ws = new WebSocket(`${protocol}//${wsHost}`);
     wsRef.current = ws;
+
+    ws.onopen = () => console.log('[Dashboard] Conectado a Sam en la nube');
+    ws.onerror = (err) => console.error('[Dashboard] Error de conexión:', err);
     ws.onmessage = async (e) => {
       try {
         let data = e.data;
