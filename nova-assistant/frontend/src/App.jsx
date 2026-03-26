@@ -29,12 +29,9 @@ function App() {
   }, [hasStarted]);
 
   const connectWebSocket = () => {
-    const host = window.location.hostname;
-    // Si estamos en local (localhost o IP), usamos el puerto 8080. 
-    // Si no, asumimos que es la URL de producción en Render.
-    const isLocal = host === 'localhost' || host.match(/^\d+\.\d+\.\d+\.\d+$/);
-    const wsHost = isLocal ? `${host}:8080` : 'sam-ai-wgic.onrender.com'; 
-    const protocol = isLocal ? 'ws:' : 'wss:';
+    // Conectar SIEMPRE a la nube de Render para el dashboard de producción
+    const wsHost = 'sam-ai-wgic.onrender.com'; 
+    const protocol = 'wss:';
     
     console.log(`[Dashboard] Connecting to ${protocol}//${wsHost}`);
     const ws = new WebSocket(`${protocol}//${wsHost}`);
