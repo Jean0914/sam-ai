@@ -8,6 +8,7 @@ function App() {
   const [inputVal, setInputVal] = useState('');
   const [upTime, setUpTime] = useState(0);
   const [msgCount, setMsgCount] = useState(0);
+  const [qrCode, setQrCode] = useState(null);
 
   useEffect(() => {
     const timer = setInterval(() => setUpTime(prev => prev + 1), 1000);
@@ -52,6 +53,8 @@ function App() {
           // speak(msg.text); // DESACTIVADO: La voz principal es la recibida por 'AUDIO' (Edge TTS)
         }
         else if (msg.type === 'AUDIO') { playAudio(msg.audio); }
+        else if (msg.type === 'WA_QR') { setQrCode(msg.value); }
+        else if (msg.type === 'WA_READY') { setQrCode(null); }
       } catch (err) { console.error(err); }
     };
     ws.onclose = () => setTimeout(connectWebSocket, 3000);
