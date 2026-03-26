@@ -15,6 +15,11 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+// Health check para Render
+app.get('/', (req, res) => {
+  res.send('Sam Backend is Running! 🚀');
+});
+
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
