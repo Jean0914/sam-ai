@@ -41,6 +41,11 @@ function broadcast(data) {
   });
 }
 
+// Keep connection alive on Render (Heartbeat)
+setInterval(() => {
+  broadcast({ type: 'PING', value: Date.now() });
+}, 45000);
+
 function normalizeTextForSpeech(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }

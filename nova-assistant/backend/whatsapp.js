@@ -9,7 +9,15 @@ class WhatsAppClient {
             puppeteer: {
                 executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
                 handleSIGINT: false,
-                args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+                args: [
+                    '--no-sandbox', 
+                    '--disable-setuid-sandbox', 
+                    '--disable-dev-shm-usage',
+                    '--disable-gpu',
+                    '--disable-extensions',
+                    '--no-first-run',
+                    '--no-default-browser-check'
+                ]
             }
         });
         this.broadcast = broadcastFunc;
