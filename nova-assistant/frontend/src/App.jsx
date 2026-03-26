@@ -55,6 +55,8 @@ function App() {
         else if (msg.type === 'AUDIO') { playAudio(msg.audio); }
         else if (msg.type === 'WA_QR') { setQrCode(msg.value); }
         else if (msg.type === 'WA_READY') { setQrCode(null); }
+        else if (msg.type === 'WA_QR') { setQrCode(msg.value); }
+        else if (msg.type === 'WA_READY') { setQrCode(null); }
       } catch (err) { console.error(err); }
     };
     ws.onclose = () => setTimeout(connectWebSocket, 3000);
